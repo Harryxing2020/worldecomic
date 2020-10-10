@@ -7,7 +7,13 @@ var link = "static/data/countries.geo.json";
 // Grabbing our GeoJSON data..
 d3.json(link, function (countryData) {
 
-  createFeatures(countryData)
+
+  updataJsonData(countryData);
+
+  console.log("---------------->", countryData.features[0].properties.happiestScore)
+  createFeatures(countryData);
+
+
 
 });
 
@@ -15,8 +21,42 @@ d3.json(link, function (countryData) {
 // Main entrance end
 ///////////////////////////////////////////////////////////////////////
 
+
 ///////////////////////////////////////////////////////////////////////
-// function1: return the color value 
+// function1: load data  
+///////////////////////////////////////////////////////////////////////
+function updataJsonData(countryData) {
+
+  countryData.features.forEach(countryInfo => {
+
+    var varcountryName = countryInfo.properties.admin
+    function findCountry(country) {
+      if ((country.country.toLowerCase() === varcountryName.toLowerCase()) ||
+        ((varcountryName === 'United States of America') && (country.country === 'United States'))) {
+
+        // add new feature for geojson
+        countryInfo.properties.population = country.population;
+        countryInfo.properties.growthrate = country.growthrate;
+        countryInfo.properties.gdp_per_capita = country.gdp_per_capita;
+        countryInfo.properties.countrysize = country.countrysize;
+        countryInfo.properties.happiestScore = country.happiestScore;
+        return true;
+      } else {
+        return false;
+      }
+    }
+    // filter() uses the custom function as its argument
+    country_info.filter(findCountry);
+  })
+
+}
+
+///////////////////////////////////////////////////////////////////////
+// function1: load data  
+///////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////
+// function2: return the color value 
 ///////////////////////////////////////////////////////////////////////
 
 function getColorValue(number) {
@@ -42,40 +82,8 @@ function getColorValue(number) {
 
 
 ///////////////////////////////////////////////////////////////////////
-// function1: end
+// function2: end
 ///////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////
-// function2: filtering the json doc by country namne 
-///////////////////////////////////////////////////////////////////////
-
-function chooseColor(countryName) {
-
-  function findCountry(country) {
-    if ((country.country.toLowerCase() === countryName.toLowerCase()) ||
-      ((countryName === 'United States of America') && (country.country === 'United States'))) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  // filter() uses the custom function as its argument
-  country = country_info.filter(findCountry);
-
-
-  if (country.length > 0) {
-    // if found the data recore in dataset
-    return getColorValue(country[0].gdp_per_capita)
-  } else {
-    // if not found return a blank color 
-    return getColorValue(0)
-  }
-
-}
-///////////////////////////////////////////////////////////////////////
-// function2: end 
-///////////////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////////////
 // function3: add Legend
@@ -141,7 +149,7 @@ function createFeatures(countryData) {
         return {
           color: "white",
           // Call the chooseColor function to decide which color to color our neighborhood (color based on borough)
-          fillColor: chooseColor(feature.properties.admin),
+          fillColor: getColorValue(feature.properties.gdp_per_capita),
           fillOpacity: 0.5,
           weight: 1.5
         };
@@ -171,29 +179,18 @@ function createFeatures(countryData) {
         });
 
         var popupString = `<h3>Country: ${feature.properties.admin}</h3><hr>`;
-        function findCountry(country) {
-          if ((country.country.toLowerCase() === feature.properties.admin.toLowerCase()) ||
-            ((feature.properties.admin === 'United States of America') && (country.country === 'United States'))) {
+        var nf = Intl.NumberFormat();
 
-            var nf = Intl.NumberFormat();
-            popupString += `<h3>Populcation: ${nf.format(country.population)}</h3>`;
-            popupString += `<h3>Populcation growth rate: ${nf.format(country.growthrate * 100)}%</h3>`;
-            popupString += `<h3>GDP per Capita: ${nf.format(country.gdp_per_capita)} USD</h3>`;
-            popupString += `<h3>Country Size: ${nf.format(country.countrysize)} (km²)</h3>`;
-            popupString += `<h3>Happiest: ${nf.format(country.happiestScore)} Score</h3>`;
-            // popupString += `<h3>Co2 Emissions: ${country.co2_emissions} (Mt CO2/yr)</h3>`;
-            return true;
-          } else {
-
-            return false;
-          }
-
-        }
-        // filter() uses the custom function as its argument
-        findCountry = country_info.filter(findCountry);
-        if (findCountry.length == 0) {
+        if (feature.properties.population) {
+          popupString += `<h3>Populcation: ${nf.format(feature.properties.population)}</h3>`;
+          popupString += `<h3>Populcation growth rate: ${nf.format(feature.properties.growthrate * 100)}%</h3>`;
+          popupString += `<h3>GDP per Capita: ${nf.format(feature.properties.gdp_per_capita)} USD</h3>`;
+          popupString += `<h3>Country Size: ${nf.format(feature.properties.countrysize)} (km²)</h3>`;
+          popupString += `<h3>Happiest: ${nf.format(feature.properties.happiestScore)} Score</h3>`;
+        } else {
           popupString += `<h3>Data is not available for the country. </h3>`;
         }
+
         layer.bindPopup(popupString);
 
       }
@@ -249,7 +246,7 @@ function createMap(choroplethMap, myMap) {
   }).addTo(myMap);
 
   addLegend().addTo(myMap);
-  
+
 }
 
 

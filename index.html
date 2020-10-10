@@ -1,53 +1,67 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>List of country info</title>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/css/style.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
+  <title>Earthquake data Leaflet Challenge Homework</title>
+</head>
+
+<body>
+
+  <header>
+
+  </header>
+
+  <main>
+
+    <div class="box" id="comparison-box">
+      <section id="intro">
+        <h1 id="subject1">World Economics</h1>
+      </section>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <h3 id="subject3">Event Drive map 
+          </h3>
+          <figure>
+            <a class="nav-link active" id="comparison-bar" href="mouseevents.html">
+              <img class="panel" id="comparison-img" src="Images/event.png" alt="Basic Image"></a>
+
+          </figure>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <h3 id="subject3">choropleth Map</h3>
+          <figure>
+            <a class="nav-link active" href="choropleth.html" id="comparison-bar">
+              <img class="panel" id="comparison-img" src="Images/choropleth.png" alt="Humidity Graph"></a>
+          </figure>
+        </div>
+      </div>
+
+      </div>
 
 
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
-    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-    crossorigin=""/>
 
 
-
-    <!-- Leaflet CSS & JS-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
-    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-    crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
-    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-    crossorigin=""></script>
-
-    <!-- d3 JavaScript -->
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-
-    <!-- Leaflet-Choropleth JavaScript -->
-    <!-- Uncomment the script below after you have downloaded the choropleth.js file. -->
-    <!-- <script type="text/javascript" src="static/js/choropleth.js"></script> -->
-
-    <!-- Our CSS -->
-    <link rel="stylesheet" type="text/css" href="static/css/style.css">
-
-  </head>
-  <body>
-
-    <!-- The div where we will inject our map -->
-    <div id="map"></div>
-
-    <!-- Leaflet JS-->
-    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
-    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-    crossorigin=""></script>
-
-    <!-- d3 JavaScript -->
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    </div>
+  </main>
 
 
-    <!-- Our JS -->
-    <script type="text/javascript" src="static/js/config.js"></script>
-    <script type="text/javascript" src="static/js/logic1.js"></script>
-    <script type="text/javascript" src="static/js/countrydata.js"></script>
-  </body>
+  <footer class="text-center text-muted py-4">
+    <hr>
+    <hr>
+    Copyright @ Harry Xing Email: Harryxing@hotmail.com
+  </footer>
+</body>
+
 </html>
